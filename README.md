@@ -1,6 +1,17 @@
 # SpecialOps
 
+### MVP1
 
+```
+1. Login Screen
+2. Employee Dashboard (Calendar with his current leaves)
+3. Apply leave for Employee
+4. Success screen for apply leave
+5. Manager Dashboard (Employee name, no of leaves taken, Q1, Q2, Q3, Q4 etc.,)
+6. Monthly Projection (Total number of days, Number of leaves taken, Number of billable days)
+6. Quartly Projection (Total number of days, Number of leaves taken, Number of billable days)
+6. Yearly Projection (Total number of days, Number of leaves taken, Number of billable days)
+```
 
 # Use Case Diagram
 
