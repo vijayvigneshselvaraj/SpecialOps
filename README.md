@@ -19,10 +19,11 @@
 
 # Class Diagram
 
-<img src="https://yuml.me/dj/54d1d943.svg">
+<img src="https://yuml.me/dj/c6958154.svg">
 
 # Backend API
 
+```
 API for Employee
 
 LeaveTracker/Employee/v1/getByEmployeeID
@@ -34,8 +35,10 @@ API for Supervisor
 LeaveTracker/Emplyoyee/v1/getAll
 LeaveTracker/Employee/v1/addEmplyoyee
 LeaveTracker/Employee/v1/deleteEmplyoyee
-LeaveTracker/Leave/v1/updateAllByDate
-LeaveTracker/Leave/v1/getMonthlyCountOfPlannedLeave
+LeaveTracker/Leave/v1/updateLeaveByDate
+LeaveTracker/Leave/v1/getCountOfLeaveByDate
+
+```
 
 
 
