@@ -1,0 +1,14 @@
+# Compiled class file
+*.class
+
+
+
+# Package Files #
+*.war
+*.classpath
+*.settings
+*.project
+*.mvn
+mvnw
+target
+
