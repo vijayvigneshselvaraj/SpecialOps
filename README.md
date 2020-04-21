@@ -40,6 +40,10 @@ LeaveTracker/Leave/v1/getCountOfLeaveByDate
 
 ```
 
+Swagger Doc URL
+
+http://localhost:8080/LeaveTracker/swagger-ui.html
+
 
 
 
