@@ -23,4 +23,8 @@ public class EmployeeService {
 			return defaultEmployee;
 	}
 
+	
+	public Employee updateEmployee(Employee employee) {
+		return employeeDao.save(employee);
+	}
 }
