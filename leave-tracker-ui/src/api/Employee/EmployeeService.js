@@ -8,6 +8,10 @@ class EmployeeService {
         return axios.get(`${API_URL}/LeaveTracker/v1/getDetailsByEmployeeId/${empid}`);
     }
 
+    addOrUpdateEmployee(employee) {
+        //console.log('executed service')
+        return axios.post(`${API_URL}/LeaveTracker/v1/updateEmployeeDetail`, employee);
+    }
 
 }
 

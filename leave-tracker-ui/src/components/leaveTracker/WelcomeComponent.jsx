@@ -10,8 +10,13 @@ class WelcomeComponent extends Component {
         this.state = {
             employeeDetails: []           
         }
+        this.addOrUpdateEmployee = this.addOrUpdateEmployee.bind(this)
     }
 
+
+    addOrUpdateEmployee() {
+        this.props.history.push(`addEmployee`)
+    }
     
 
     render() {
@@ -46,6 +51,9 @@ class WelcomeComponent extends Component {
                             }
                         </tbody>
                     </table>
+                    <div className="row">
+                        <button className="btn btn-success" onClick={this.addOrUpdateEmployee}>Add</button>
+                    </div>
             </div>
             </>
         )
