@@ -16,7 +16,11 @@ public class EmployeeService {
 	
 	public Employee getByEmployeeId(Long employeeId) {
 		Optional<Employee> employee = employeeDao.findById(employeeId);
-		return employee.get();
+		Employee defaultEmployee = new Employee(0l, "", "", "");
+		if (employee.isPresent())
+			return employee.get();
+		else
+			return defaultEmployee;
 	}
 
 }
