@@ -2,8 +2,10 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import WelcomeComponent from './components/leaveTracker/WelcomeComponent'
 import EmployeeComponent from './components/leaveTracker/EmployeeComponent'
+import LeaveComponent from './components/leaveTracker/LeaveComponent'
 import HeaderComponent from './components/leaveTracker/HeaderComponent.jsx'
 import FooterComponent from './components/leaveTracker/FooterComponent.jsx'
+import ManageYourLeaveComponent from './components/leaveTracker/ManageYourLeaveComponent.jsx'
 import './App.css';
 import './bootstrap.css';
 
@@ -15,7 +17,9 @@ function App() {
    
       <Switch>
                             <Route path="/" exact component={WelcomeComponent}/>
-                            <Route path="/:id" component={EmployeeComponent}/>                           
+                            <Route path="/addEmployee" component={EmployeeComponent}/>      
+                            <Route path="/addLeave" component={LeaveComponent}/>  
+                            <Route path="/manageYourLeave" component={ManageYourLeaveComponent}/>                      
     
                         </Switch>
       <FooterComponent/>

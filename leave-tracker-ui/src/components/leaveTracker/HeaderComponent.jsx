@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Link } from 'react-router-dom'
 
 
 
@@ -13,7 +13,7 @@ class HeaderComponent extends Component {
                     <div><a href="http://www.tcs.com" className="navbar-brand">TCS</a></div>
                     <ul className="navbar-nav">
                        
-                    <li className="nav-link">Manage Your Leave</li>
+                    <li><Link  className="nav-link" to="/manageYourLeave">Manage Your Leave</Link></li>
                     <li className="nav-link">Manage Employee Leave</li>
                     <li className="nav-link">Leave Reports</li>
                     </ul>
