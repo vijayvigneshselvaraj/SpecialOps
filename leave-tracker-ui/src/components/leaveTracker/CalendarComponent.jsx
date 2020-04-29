@@ -8,12 +8,16 @@ const localizer = momentLocalizer(moment);
 
 class CalendarComponent extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     state = {
         events: [
           {
             start: moment().toDate(),
             end: moment()
-              .add(1, "days")
+              .add(0, "days")
               .toDate(),
             title: "Sick leave"
           }
@@ -28,7 +32,7 @@ class CalendarComponent extends Component {
                        defaultDate={new Date()}
                        defaultView="month"
                        events={this.state.events}
-                       style={{ height: "50vh", width: "50vw" }}
+                       style={{ height: "300px", width: "max-content" }}
                   />
             </>
         );
