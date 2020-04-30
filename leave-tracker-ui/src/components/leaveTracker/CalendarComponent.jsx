@@ -10,19 +10,16 @@ class CalendarComponent extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            events: this.props.leaveData
+        };
     }
 
-    state = {
-        events: [
-          {
-            start: moment().toDate(),
-            end: moment()
-              .add(0, "days")
-              .toDate(),
-            title: "Sick leave"
-          }
-        ]
-      };
+    componentWillReceiveProps(props) {
+        this.setState({
+            events: props.leaveData
+        });
+    }
 
     render() {
         return (

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import LeaveService from '../../api/Leave/LeaveService.js'
 import CalendarComponent from './CalendarComponent'
+import moment from "moment";
 
 class ManageYourLeaveComponent extends Component {
   constructor(props) {
@@ -8,16 +9,23 @@ class ManageYourLeaveComponent extends Component {
     this.empid = React.createRef();
     this.retrieveLeave = this.retrieveLeave.bind(this)
     this.state = {
-        Leave: []
+        Leave: [],
+        leaveData: [
+                     /* {
+                       start: moment().toDate(),
+                       end: moment()
+                         .add(0, "days")
+                         .toDate(),
+                       title: "Sick leave"
+                     } */
+                   ]
     }
     this.addOrUpdateLeave = this.addOrUpdateLeave.bind(this)
 }
 
-
 addOrUpdateLeave() {
     this.props.history.push(`addLeave`)
 }
-
 
 render() {
     return (
@@ -37,7 +45,7 @@ render() {
 
                 <div className="row">
                     <div className="leftPane" style={{float:'left'}}>
-                                        <CalendarComponent leaveData={this.state.Leave.date}/>
+                                        <CalendarComponent leaveData={this.state.leaveData}/>
                                     </div>
 
                                     <div className="rightPane" style={{float:'right', 'marginLeft': '40px'}}>
@@ -70,7 +78,21 @@ render() {
 
 retrieveLeave() {
     LeaveService.retrieveLeave(this.empid.current.value)
-        .then(response => this.setState({ Leave: response.data }))
+        .then(response => {
+            console.log(response.data)
+            let leaveStartDate = moment(response.data.date, 'YYYY-MM-DD')
+            this.setState({ Leave: response.data,
+                leaveData:[
+                     {
+                       start: leaveStartDate.toDate(),
+                       end: leaveStartDate
+                         .add(0, "days")
+                         .toDate(),
+                       title: response.data.leaveType
+                     }
+                   ]
+             });
+        })
 }
 
 }
