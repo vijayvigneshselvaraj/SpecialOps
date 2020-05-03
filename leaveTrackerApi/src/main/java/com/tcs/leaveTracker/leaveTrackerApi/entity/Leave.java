@@ -2,7 +2,7 @@ package com.tcs.leaveTracker.leaveTrackerApi.entity;
 
 import java.sql.Date;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,10 +13,10 @@ public class Leave {
 	@Id
 	@GeneratedValue
 	private Long leaveId;
-	
-	
+
 	private Long employeeId;
 
+	@Column(unique=true)
 	private Date date;
 
 	private Boolean isHoliday;
@@ -26,6 +26,10 @@ public class Leave {
 	private Boolean isPlannedLeaveApproved;
 
 	private String leaveType;
+	
+	public Long getLeaveId() {
+		return leaveId;
+	}
 
 	public Long getEmployeeId() {
 		return employeeId;

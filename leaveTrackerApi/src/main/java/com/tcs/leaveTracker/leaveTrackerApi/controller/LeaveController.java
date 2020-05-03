@@ -1,10 +1,11 @@
 package com.tcs.leaveTracker.leaveTrackerApi.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,14 @@ public class LeaveController {
 	public Leave updateLeaveDetail(@RequestBody Leave leave) {
 		return leaveService.updateLeave(leave);
 		
+	}
+	
+
+	
+	@DeleteMapping("/v1/deleteLeaveById//{leaveId}")
+	public ResponseEntity<Void> deleteTodo(@PathVariable Long leaveId) {
+		 leaveService.deleteById(leaveId);
+		 return ResponseEntity.noContent().build();
 	}
 	
 }

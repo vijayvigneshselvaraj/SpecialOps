@@ -21,4 +21,9 @@ public class LeaveService {
 	public Leave updateLeave(Leave leave) {
 		return leaveDao.save(leave);
 	}
+
+	public  void deleteById(long leaveId) {
+		 leaveDao.deleteById(leaveId);
+	
+	}
 }
