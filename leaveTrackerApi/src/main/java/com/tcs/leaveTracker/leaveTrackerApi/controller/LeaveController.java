@@ -1,5 +1,8 @@
 package com.tcs.leaveTracker.leaveTrackerApi.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +22,7 @@ public class LeaveController {
 	LeaveService leaveService;
 	
 	@GetMapping(path = "/v1/getLeavesByEmployeeId/{employeeId}")
-	public Leave getLeavesByEmployeeId(@PathVariable Long employeeId) {
+	public List<Leave> getLeavesByEmployeeId(@PathVariable Long employeeId) {
 		return leaveService.getLeavesByEmployeeId(employeeId);
 		
 	}

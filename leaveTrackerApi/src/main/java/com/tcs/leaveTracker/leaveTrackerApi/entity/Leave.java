@@ -2,13 +2,19 @@ package com.tcs.leaveTracker.leaveTrackerApi.entity;
 
 import java.sql.Date;
 
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Leave {
 
 	@Id
+	@GeneratedValue
+	private Long leaveId;
+	
+	
 	private Long employeeId;
 
 	private Date date;

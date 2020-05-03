@@ -1,6 +1,6 @@
 package com.tcs.leaveTracker.leaveTrackerApi.service;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +13,9 @@ public class LeaveService {
 	@Autowired
 	LeaveDao leaveDao;
 	
-	public Leave getLeavesByEmployeeId(Long employeeId) {
-		Optional<Leave> leave = leaveDao.findById(employeeId);
-		return leave.get();
+	public List<Leave> getLeavesByEmployeeId(Long employeeId) {
+		return leaveDao.findByEmployeeId(employeeId);
+	
 	}
 
 	public Leave updateLeave(Leave leave) {
