@@ -7,9 +7,9 @@ class ManageYourLeaveComponent extends Component {
   constructor(props) {
     super(props)
     this.empid = React.createRef();
-    this.retrieveLeave = this.retrieveLeave.bind(this)
+    
     this.state = {
-        Leave: [],
+        leaves: [],
         leaveData: [
                      /* {
                        start: moment().toDate(),
@@ -21,15 +21,51 @@ class ManageYourLeaveComponent extends Component {
                    ]
     }
     this.addOrUpdateLeave = this.addOrUpdateLeave.bind(this)
+    this.deleteLeaveClicked = this.deleteLeaveClicked.bind(this)
+    this.retrieveLeave = this.retrieveLeave.bind(this)
 }
 
 addOrUpdateLeave() {
     this.props.history.push(`addLeave`)
 }
 
+deleteLeaveClicked(leaveId) {
+    //let username = AuthenticationService.getLoggedInUserName()
+    console.log(leaveId + " " );
+    LeaveService.deleteLeaveById(leaveId)
+        .then(
+            response => {
+               // this.setState({ message: `Delete of Leave  Successful` })
+               this.retrieveLeave()
+            }
+        )
+
+}
+
+retrieveLeave() {
+    LeaveService.retrieveLeave(this.empid.current.value)
+        .then(response => {
+            console.log(response.data)
+            let leaveStartDate = moment(response.data.date, 'YYYY-MM-DD')
+            this.setState({ leaves: response.data,
+                leaveData:[
+                     {
+                       start: leaveStartDate.toDate(),
+                       end: leaveStartDate
+                         .add(0, "days")
+                         .toDate(),
+                       title: response.data.leaveType
+                     }
+                   ]
+             })
+        })
+}
+
+
+
 render() {
     return (
-        <>
+        <div>
 
             <div className="container" style={{'marginTop': '20px', 'marginBottom': '20px'}}>
                 <label>Employee ID:</label>
@@ -55,19 +91,20 @@ render() {
                                                                     <th>Employee Id</th>
                                                                     <th>Date</th>
                                                                     <th>Leave Type</th>
-
+                                                                   
+                                                                    <th>Delete</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 {
-                                                                    this.state.Leave.map(
-                                                                        Leave =>
-                                                                            <tr key={Leave.leaveId}>
-                                                                           
-                                                                                <td>{Leave.employeeId}</td>
-                                                                                <td>{Leave.date}</td>
-                                                                                <td>{Leave .leaveType}</td>
-                                                                                <td><button className="btn btn-warning" onClick={() => this.deleteTodoClicked(Leave.leaveId)}>Delete</button></td>
+                                                                    this.state.leaves.map(
+                                                                        leave =>
+                                                                            <tr key={leave.leaveId}>
+                                                                                <td>{leave.employeeId}</td>
+                                                                                <td>{leave.date}</td>
+                                                                                <td>{leave.leaveType}</td>
+                                                                                
+                                                                                <td><button className="btn btn-warning" onClick={() => this.deleteLeaveClicked(leave.leaveId)}>Delete</button></td>
                                                                             </tr>
                                                                             )
                                                                 }
@@ -76,27 +113,8 @@ render() {
                                     </div>
                 </div>
         </div>
-        </>
+      </div>
     )
-}
-
-retrieveLeave() {
-    LeaveService.retrieveLeave(this.empid.current.value)
-        .then(response => {
-            console.log(response.data)
-            let leaveStartDate = moment(response.data.date, 'YYYY-MM-DD')
-            this.setState({ Leave: response.data,
-                leaveData:[
-                     {
-                       start: leaveStartDate.toDate(),
-                       end: leaveStartDate
-                         .add(0, "days")
-                         .toDate(),
-                       title: response.data.leaveType
-                     }
-                   ]
-             });
-        })
 }
 
 }

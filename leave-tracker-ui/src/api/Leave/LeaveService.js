@@ -13,6 +13,10 @@ class LeaveService {
         return axios.post(`${API_URL}/LeaveTracker/v1/updateLeaveDetail`, leave);
     }
    
+    deleteLeaveById(leaveId) {
+        //console.log('executed service')
+        return axios.delete(`${API_URL}/LeaveTracker/v1/deleteLeaveById/${leaveId}`);
+    }
 
 }
 
