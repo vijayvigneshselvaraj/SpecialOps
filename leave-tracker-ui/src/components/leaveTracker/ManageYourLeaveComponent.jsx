@@ -60,12 +60,16 @@ render() {
                                                             </thead>
                                                             <tbody>
                                                                 {
-                                                                            <tr>
-                                                                                <td>{this.state.Leave.employeeId}</td>
-                                                                                <td>{this.state.Leave.date}</td>
-                                                                                <td>{this.state.Leave.leaveType}</td>
-
+                                                                    this.state.Leave.map(
+                                                                        Leave =>
+                                                                            <tr key={Leave.leaveId}>
+                                                                           
+                                                                                <td>{Leave.employeeId}</td>
+                                                                                <td>{Leave.date}</td>
+                                                                                <td>{Leave .leaveType}</td>
+                                                                                <td><button className="btn btn-warning" onClick={() => this.deleteTodoClicked(Leave.leaveId)}>Delete</button></td>
                                                                             </tr>
+                                                                            )
                                                                 }
                                                             </tbody>
                                                         </table>
