@@ -46,17 +46,18 @@ retrieveLeave() {
     LeaveService.retrieveLeave(this.empid.current.value)
         .then(response => {
             console.log(response.data)
-            let leaveStartDate = moment(response.data.date, 'YYYY-MM-DD')
+            let leaveList = []
+            response.data.forEach(function(d, i) {
+                let leaveStartDate = moment(d.date, 'YYYY-MM-DD')
+                var dict = {
+                    'start':leaveStartDate.toDate(),
+                    'end':leaveStartDate.add(0, "days").toDate(),
+                    'title':d.leaveType
+                }
+                leaveList.push(dict)
+            })
             this.setState({ leaves: response.data,
-                leaveData:[
-                     {
-                       start: leaveStartDate.toDate(),
-                       end: leaveStartDate
-                         .add(0, "days")
-                         .toDate(),
-                       title: response.data.leaveType
-                     }
-                   ]
+                leaveData: leaveList
              })
         })
 }

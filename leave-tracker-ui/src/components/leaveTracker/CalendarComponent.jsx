@@ -29,7 +29,7 @@ class CalendarComponent extends Component {
                        defaultDate={new Date()}
                        defaultView="month"
                        events={this.state.events}
-                       style={{ height: "300px", width: "max-content" }}
+                       style={{ height: "400px", width: "max-content" }}
                   />
             </>
         );
