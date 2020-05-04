@@ -27,7 +27,12 @@ public class LeaveController {
 		return leaveService.getLeavesByEmployeeId(employeeId);
 		
 	}
-
+	
+	@GetMapping(path = "/v1/getCountOfLeaves/{employeeId}/{leaveType}")
+	public long getLeavesByEmployeeId(@PathVariable Long employeeId, @PathVariable String leaveType) {
+		return leaveService.getCountOfLeaves(employeeId, leaveType);
+		
+	}
 	
 	@PostMapping(path = "/v1/updateLeaveDetail")
 	public Leave updateLeaveDetail(@RequestBody Leave leave) {

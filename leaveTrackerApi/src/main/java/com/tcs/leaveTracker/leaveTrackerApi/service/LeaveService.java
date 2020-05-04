@@ -15,7 +15,6 @@ public class LeaveService {
 	
 	public List<Leave> getLeavesByEmployeeId(Long employeeId) {
 		return leaveDao.findByEmployeeId(employeeId);
-	
 	}
 
 	public Leave updateLeave(Leave leave) {
@@ -23,7 +22,12 @@ public class LeaveService {
 	}
 
 	public  void deleteById(long leaveId) {
-		 leaveDao.deleteById(leaveId);
-	
+		 leaveDao.deleteById(leaveId);	 
 	}
+	
+	
+	public long getCountOfLeaves(Long employeeId, String leaveType) {
+		return leaveDao.findByEmployeeIdAndLeaveType(employeeId, leaveType).size();
+	}
+	
 }

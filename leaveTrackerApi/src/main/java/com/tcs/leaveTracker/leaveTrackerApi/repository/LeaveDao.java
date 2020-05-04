@@ -16,4 +16,5 @@ import com.tcs.leaveTracker.leaveTrackerApi.entity.Leave;
 public interface LeaveDao extends CrudRepository<Leave, Long> {
 
 	List<Leave> findByEmployeeId(Long employeeID);
+	List<Leave> findByEmployeeIdAndLeaveType(Long employeeId,String leaveType);
 }
