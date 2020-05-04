@@ -8,6 +8,16 @@ class LeaveService {
         return axios.get(`${API_URL}/LeaveTracker/v1/getLeavesByEmployeeId/${empid}`);
     }
 
+    getCountOfPlannedLeaves(empid, leaveType) {
+        //console.log('executed service')
+        return axios.get(`${API_URL}/LeaveTracker/v1/getCountOfLeaves/${empid}/Planned Leave`);
+    }
+    
+    getCountOfSickLeaves(empid, leaveType) {
+        //console.log('executed service')
+        return axios.get(`${API_URL}/LeaveTracker/v1/getCountOfLeaves/${empid}/Sick Leave`);
+    }
+
     addOrUpdateLeave(leave) {
         //console.log('executed service')
         return axios.post(`${API_URL}/LeaveTracker/v1/updateLeaveDetail`, leave);
