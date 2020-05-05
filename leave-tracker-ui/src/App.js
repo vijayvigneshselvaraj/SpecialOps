@@ -8,6 +8,8 @@ import FooterComponent from './components/leaveTracker/FooterComponent.jsx'
 import ManageYourLeaveComponent from './components/leaveTracker/ManageYourLeaveComponent.jsx'
 import './App.css';
 import './bootstrap.css';
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 
 function App() {
   return (
