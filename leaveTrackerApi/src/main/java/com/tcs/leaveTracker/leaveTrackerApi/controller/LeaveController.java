@@ -34,6 +34,12 @@ public class LeaveController {
 		
 	}
 	
+	@GetMapping(path = "/v1/getTotalCountOfLeavesPerMonth/{month}")
+	public long getTotalCountOfLeavesPerMonth(@PathVariable int month) {
+		return leaveService.getTotalCountOfLeavesPerMonth(month);
+		
+	}
+	
 	@PostMapping(path = "/v1/updateLeaveDetail")
 	public Leave updateLeaveDetail(@RequestBody Leave leave) {
 		return leaveService.updateLeave(leave);

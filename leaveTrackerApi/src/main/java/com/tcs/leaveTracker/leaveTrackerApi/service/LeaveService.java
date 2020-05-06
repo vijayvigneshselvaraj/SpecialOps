@@ -30,4 +30,8 @@ public class LeaveService {
 		return leaveDao.findByEmployeeIdAndLeaveType(employeeId, leaveType).size();
 	}
 	
+	public long getTotalCountOfLeavesPerMonth(int month) {
+		return leaveDao.fetchLeavIdByMonth(month).size();
+	}
+	
 }
