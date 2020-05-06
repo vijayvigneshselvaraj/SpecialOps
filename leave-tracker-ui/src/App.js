@@ -6,6 +6,7 @@ import LeaveComponent from './components/leaveTracker/LeaveComponent'
 import HeaderComponent from './components/leaveTracker/HeaderComponent.jsx'
 import FooterComponent from './components/leaveTracker/FooterComponent.jsx'
 import ManageYourLeaveComponent from './components/leaveTracker/ManageYourLeaveComponent.jsx'
+import LeaveReportComponent from './components/leaveTracker/LeaveReportComponent.jsx'
 import './App.css';
 import './bootstrap.css';
 import 'react-date-range/dist/styles.css'; // main css file
@@ -21,6 +22,7 @@ function App() {
         <Route path="/addEmployee" component={EmployeeComponent}/>
         <Route path="/addLeave" component={LeaveComponent}/>
         <Route path="/manageYourLeave" component={ManageYourLeaveComponent}/>
+        <Route path="/leaveReport" component={LeaveReportComponent}/>
       </Switch>
       <FooterComponent/>
       </Router>

@@ -18,6 +18,11 @@ class LeaveService {
         return axios.get(`${API_URL}/LeaveTracker/v1/getCountOfLeaves/${empid}/Sick Leave`);
     }
 
+    getTotalCountOfLeavesPerMonth(month) {
+        //console.log('executed service')
+        return axios.get(`${API_URL}/LeaveTracker/v1/getTotalCountOfLeavesPerMonth/${month}`);
+    }
+
     addOrUpdateLeave(leave) {
         //console.log('executed service')
         return axios.post(`${API_URL}/LeaveTracker/v1/updateLeaveDetail`, leave);

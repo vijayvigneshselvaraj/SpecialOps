@@ -15,7 +15,7 @@ class HeaderComponent extends Component {
                        
                     <li><Link  className="nav-link" to="/manageYourLeave">Manage Your Leave</Link></li>
                     <li className="nav-link">Manage Employee Leave</li>
-                    <li className="nav-link">Leave Reports</li>
+                    <li><Link  className="nav-link" to="/leaveReport">Leave Reports</Link></li>
                     </ul>
                     <ul className="navbar-nav navbar-collapse justify-content-end">
                     <li className="nav-link">Login</li>
