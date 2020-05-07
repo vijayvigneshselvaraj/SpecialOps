@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import EmployeeService from '../../api/Employee/EmployeeService.js'
+import AuthenticationService from './AuthenticationService.js'
 
 class WelcomeComponent extends Component {
 
@@ -17,11 +18,26 @@ class WelcomeComponent extends Component {
     addOrUpdateEmployee() {
         this.props.history.push(`addEmployee`)
     }
+
+    retrieveEmployeeDetail() {     
+        EmployeeService.retrieveEmployee(this.empid.current.value)
+            .then(response => this.setState({ employeeDetails: response.data }))          
+    }
+
+    componentDidMount() {
+       
+        let empid = AuthenticationService.getLoggedInUserName()
+
+        EmployeeService.retrieveEmployee(empid)
+        .then(response => this.setState({ employeeDetails: response.data }))  
+
+}
+
     
 
     render() {
         return (
-            <>
+            <div>
                 <h1>Welcome to Leave Tracker User Interface!</h1>
                 <div className="container">
                     Enter Employee ID here
@@ -55,14 +71,10 @@ class WelcomeComponent extends Component {
                         <button className="btn btn-success" onClick={this.addOrUpdateEmployee}>Add</button>
                     </div>
             </div>
-            </>
+            </div>
         )
     }
 
-    retrieveEmployeeDetail() {     
-        EmployeeService.retrieveEmployee(this.empid.current.value)
-            .then(response => this.setState({ employeeDetails: response.data }))          
-    }
 
 }
 

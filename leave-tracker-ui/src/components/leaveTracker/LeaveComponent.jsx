@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Formik, Form, Field } from 'formik';
 import LeaveService from '../../api/Leave/LeaveService.js'
+import AuthenticationService from './AuthenticationService.js'
 import {useState} from 'react';
 import { DateRange } from 'react-date-range';
 import { addDays } from 'date-fns';
@@ -13,7 +14,7 @@ class LeaveComponent extends Component {
 
         this.state = {
             id: this.props.match.params.id,
-            employeeId: '',
+            employeeId: AuthenticationService.getLoggedInUserName(),
             date: '',
             leaveType: '',
             dateRange: [

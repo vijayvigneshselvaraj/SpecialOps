@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
 import LeaveService from '../../api/Leave/LeaveService.js'
 import CalendarComponent from './CalendarComponent'
-import AuthenticationService from './AuthenticationService.js'
 import moment from "moment";
 
-class ManageYourLeaveComponent extends Component {
+class ManageEmployeeLeaveComponent extends Component {
     constructor(props) {
         super(props)
-        
-        
+        this.empid = React.createRef();
 
         this.state = {
             leaves: [],
-            empid: AuthenticationService.getLoggedInUserName(),
             plannedLeaveCount: '',
             sickLeaveCount: '',
          //   totalLeaveCount: '',
@@ -29,7 +26,7 @@ class ManageYourLeaveComponent extends Component {
     
         this.addOrUpdateLeave = this.addOrUpdateLeave.bind(this)
         this.deleteLeaveClicked = this.deleteLeaveClicked.bind(this)
-      //  this.retrieveLeave = this.retrieveLeave.bind(this)
+        this.retrieveLeave = this.retrieveLeave.bind(this)
         this.addAction = this.addAction.bind(this)
     }
 
@@ -44,71 +41,66 @@ class ManageYourLeaveComponent extends Component {
             .then(
                 response => {
                     // this.setState({ message: `Delete of Leave  Successful` })
-                    this.refreshLeaves()
+                    this.retrieveLeave()
                 }
             )
 
     }
 
-    refreshLeaves() {
-        LeaveService.retrieveLeave(this.state.empid)
-        .then(response => {
-            console.log(response.data)
-            let leaveList = []
-            response.data.forEach(function (d, i) {
-                let leaveStartDate = moment(d.date, 'YYYY-MM-DD')
-                var dict = {
-                    'start': leaveStartDate.toDate(),
-                    'end': leaveStartDate.add(0, "days").toDate(),
-                    'title': d.leaveType
-                }
-                leaveList.push(dict)
+    retrieveLeave() {
+        LeaveService.retrieveLeave(this.empid.current.value)
+            .then(response => {
+                console.log(response.data)
+                let leaveList = []
+                response.data.forEach(function (d, i) {
+                    let leaveStartDate = moment(d.date, 'YYYY-MM-DD')
+                    var dict = {
+                        'start': leaveStartDate.toDate(),
+                        'end': leaveStartDate.add(0, "days").toDate(),
+                        'title': d.leaveType
+                    }
+                    leaveList.push(dict)
+                })
+                this.setState({
+                    leaves: response.data,
+                    leaveData: leaveList
+                })
             })
-            this.setState({
-                leaves: response.data,
-                leaveData: leaveList
-            })
-        })
 
-        LeaveService.getCountOfPlannedLeaves(this.state.empid)
-        .then(response => {
-            console.log(response.data)
-            
-            this.setState({
-                plannedLeaveCount: response.data    
+            LeaveService.getCountOfPlannedLeaves(this.empid.current.value)
+            .then(response => {
+                console.log(response.data)
+                
+                this.setState({
+                    plannedLeaveCount: response.data    
+                })
             })
-        })
 
-        LeaveService.getCountOfSickLeaves(this.state.empid)
-        .then(response => {
-            console.log(response.data)
-            
-            this.setState({
-                sickLeaveCount: response.data          
+            LeaveService.getCountOfSickLeaves(this.empid.current.value)
+            .then(response => {
+                console.log(response.data)
+                
+                this.setState({
+                    sickLeaveCount: response.data          
+                })
             })
-        })
+     
+ 
+
     }
     
     addAction =(event)=> {
         let x = this.state.plannedLeaveCount + this.state.sickLeaveCount
         this.setState({totalLeaveCount: x })
       }
-
-      componentDidMount() {
-
-        if (this.state.id === -1) {
-            return
-        }
-   
-       this.refreshLeaves();
-
-    }
-
     render() {
         return (
             <div>
 
                 <div className="container" style={{ 'marginTop': '20px', 'marginBottom': '20px' }}>
+                    <label>Employee ID:</label>
+                    <input ref={this.empid} style={{ 'marginLeft': '20px' }} placeholder="Employee ID" onSubmit={this.retrieveLeave} />
+                    <button onClick={this.retrieveLeave} style={{ 'marginLeft': '10px' }} className="btn btn-success btn-sm">Get Leave detail</button>
 
                     <label style={{ 'marginLeft': '40px' }}>New Leave:</label>
                     <button className="btn btn-success btn-sm" style={{ 'marginLeft': '10px' }} onClick={this.addOrUpdateLeave}>Apply</button>
@@ -183,4 +175,4 @@ class ManageYourLeaveComponent extends Component {
 
 }
 
-export default ManageYourLeaveComponent
+export default ManageEmployeeLeaveComponent
