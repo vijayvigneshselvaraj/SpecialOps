@@ -15,7 +15,8 @@ class LeaveComponent extends Component {
         this.state = {
             id: this.props.match.params.id,
             employeeId: AuthenticationService.getLoggedInUserName(),
-            date: '',
+            start_date: '',
+            end_date: '',
             leaveType: '',
             dateRange: [
                            {
@@ -26,6 +27,7 @@ class LeaveComponent extends Component {
                          ]
         }
         this.onSubmit = this.onSubmit.bind(this)
+        this.formatDate = this.formatDate.bind(this)
     }
 
     handleSelect(ranges){
@@ -39,13 +41,28 @@ class LeaveComponent extends Component {
     }
 
     onSubmit(values) {
+        var e = document.getElementById("leaveTypeID");
+        var text = e.options[e.selectedIndex].text;
         let leave = {
             employeeId: values.employeeId,
-            date: values.date,
-            leaveType: values.leaveType,
+            start_date: this.formatDate(this.state.dateRange[0].startDate),
+            end_date: this.formatDate(this.state.dateRange[0].endDate),
+            leaveType: text,
         }
         LeaveService.addOrUpdateLeave(leave)
             .then(() => this.props.history.push('/manageYourLeave'))
+    }
+
+    formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        return [year, month, day].join('-');
     }
 
     render() {
@@ -67,7 +84,6 @@ class LeaveComponent extends Component {
                                  <DateRange
                                    editableDateInputs={true}
                                    onChange={item => {
-                                    console.log(item)
                                     this.setState({'dateRange': [item.selection]})
                                    }}
                                    moveRangeOnFirstSelection={true}
@@ -96,7 +112,7 @@ class LeaveComponent extends Component {
                                             <fieldset className="form-group">
                                                 <label className="form-control-sm">Leave Type</label>
                                                 {/* <Field className="form-control form-control-sm" type="text" name="leaveType" /> */}
-                                                <select className="form-control form-control-sm" name="leaveType">
+                                                <select className="form-control form-control-sm" id="leaveTypeID" name="leaveType">
                                                     <option>Planned Leave</option>
                                                     <option>Sick Leave</option>
                                                  </select>

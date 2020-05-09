@@ -56,10 +56,12 @@ class ManageYourLeaveComponent extends Component {
             console.log(response.data)
             let leaveList = []
             response.data.forEach(function (d, i) {
-                let leaveStartDate = moment(d.date, 'YYYY-MM-DD')
+                let leaveStartDate = moment(d.start_date, 'YYYY-MM-DD')
+                let leaveEndDate = moment(d.end_date, 'YYYY-MM-DD')
                 var dict = {
                     'start': leaveStartDate.toDate(),
-                    'end': leaveStartDate.add(0, "days").toDate(),
+                    /* 'end': leaveStartDate.add(d.con_days, "days").toDate(), */
+                    'end' : leaveEndDate.toDate(),
                     'title': d.leaveType
                 }
                 leaveList.push(dict)
