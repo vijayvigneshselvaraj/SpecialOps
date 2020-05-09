@@ -45,9 +45,10 @@ class LeaveComponent extends Component {
         var text = e.options[e.selectedIndex].text;
         let leave = {
             employeeId: values.employeeId,
-            start_date: this.formatDate(this.state.dateRange[0].startDate),
-            end_date: this.formatDate(this.state.dateRange[0].endDate),
+            startDate: this.formatDate(this.state.dateRange[0].startDate),
+            endDate: this.formatDate(this.state.dateRange[0].endDate),
             leaveType: text,
+            isLeave: true,
         }
         LeaveService.addOrUpdateLeave(leave)
             .then(() => this.props.history.push('/manageYourLeave'))

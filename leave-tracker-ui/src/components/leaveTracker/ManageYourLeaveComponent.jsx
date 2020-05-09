@@ -56,12 +56,12 @@ class ManageYourLeaveComponent extends Component {
             console.log(response.data)
             let leaveList = []
             response.data.forEach(function (d, i) {
-                let leaveStartDate = moment(d.start_date, 'YYYY-MM-DD')
-                let leaveEndDate = moment(d.end_date, 'YYYY-MM-DD')
+                let leaveStartDate = moment(d.startDate, 'YYYY-MM-DD')
+                let leaveEndDate = moment(d.endDate, 'YYYY-MM-DD')
                 var dict = {
                     'start': leaveStartDate.toDate(),
                     /* 'end': leaveStartDate.add(d.con_days, "days").toDate(), */
-                    'end' : leaveEndDate.toDate(),
+                    'end' : leaveEndDate.add(1, "days").toDate(),
                     'title': d.leaveType
                 }
                 leaveList.push(dict)
@@ -75,22 +75,22 @@ class ManageYourLeaveComponent extends Component {
         LeaveService.getCountOfPlannedLeaves(this.state.empid)
         .then(response => {
             console.log(response.data)
-            
+
             this.setState({
-                plannedLeaveCount: response.data    
+                plannedLeaveCount: response.data
             })
         })
 
         LeaveService.getCountOfSickLeaves(this.state.empid)
         .then(response => {
             console.log(response.data)
-            
+
             this.setState({
-                sickLeaveCount: response.data          
+                sickLeaveCount: response.data
             })
         })
     }
-    
+
     addAction =(event)=> {
         let x = this.state.plannedLeaveCount + this.state.sickLeaveCount
         this.setState({totalLeaveCount: x })
@@ -101,7 +101,7 @@ class ManageYourLeaveComponent extends Component {
         if (this.state.id === -1) {
             return
         }
-   
+
        this.refreshLeaves();
 
     }
@@ -129,7 +129,8 @@ class ManageYourLeaveComponent extends Component {
                                 <thead>
                                     <tr>
                                         <th>Employee Id</th>
-                                        <th>Date</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
                                         <th>Leave Type</th>
                                         <th>Delete</th>
                                     </tr>
@@ -140,9 +141,9 @@ class ManageYourLeaveComponent extends Component {
                                             leave =>
                                                 <tr key={leave.leaveId}>
                                                     <td>{leave.employeeId}</td>
-                                                    <td>{leave.date}</td>
+                                                    <td>{leave.startDate}</td>
+                                                    <td>{leave.endDate}</td>
                                                     <td>{leave.leaveType}</td>
-
                                                     <td><button className="btn btn-warning" onClick={() => this.deleteLeaveClicked(leave.leaveId)}>Delete</button></td>
                                                 </tr>
                                         )
