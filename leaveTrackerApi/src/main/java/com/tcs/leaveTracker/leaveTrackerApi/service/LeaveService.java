@@ -17,8 +17,9 @@ public class LeaveService {
 		return leaveDao.findByEmployeeId(employeeId);
 	}
 
-	public Leave updateLeave(Leave leave) {
-		return leaveDao.save(leave);
+	public String updateLeave(List<Leave> leaves) {
+	    leaves.forEach(leave -> leaveDao.save(leave) );
+		return "Success";
 	}
 
 	public  void deleteById(long leaveId) {

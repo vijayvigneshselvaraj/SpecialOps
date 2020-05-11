@@ -17,9 +17,8 @@ public class Leave {
 	private Long employeeId;
 
 	@Column(unique=true)
-	private Date startDate;
+	private Date date;
 
-    private Date endDate;
 
 	private Boolean isHoliday;
 
@@ -41,23 +40,17 @@ public class Leave {
 		this.employeeId = employeeId;
 	}
 
-    public Date getStartDate() {
-        return startDate;
-    }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
 
-    public Date getEndDate() {
-        return endDate;
-    }
+    public Date getDate() {
+		return date;
+	}
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-    public Boolean getIsHoliday() {
+	public Boolean getIsHoliday() {
 		return isHoliday;
 	}
 

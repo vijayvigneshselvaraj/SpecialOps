@@ -41,8 +41,8 @@ public class LeaveController {
 	}
 	
 	@PostMapping(path = "/v1/updateLeaveDetail")
-	public Leave updateLeaveDetail(@RequestBody Leave leave) {
-		return leaveService.updateLeave(leave);
+	public String updateLeaveDetail(@RequestBody List<Leave> leaves) {
+		return leaveService.updateLeave(leaves);
 		
 	}
 	
